@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сканер антихрупкости</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 20px;
+            font-size: 20px;
+        }
+        .survey-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid white;
+            border-radius: 15px;
+            background-color: #42A1A5;
+            color: white;
+            display: none;
+            transform-origin: top;
+            transform: scaleY(0);
+            transition: transform 1400ms cubic-bezier(0.25, 1, 0.25, 1);
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        .instruction {
+            margin-bottom: 30px;
+        }
+        .statement {
+            margin-bottom: 45px;
+        }
+        input[type="radio"] {
+           width: 19px;
+           height: 19px;
+        }
+
+        .likert-scale {
+           display: flex;
+           justify-content: space-between;
+        }
+        .likert-scale label {
+            font-size: 20px;
+        }
+        .submit-button, .start-diagnosis, .restart-button {
+           display: block;
+           margin: 0 auto;
+           width: 7cm;
+           padding: 14px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .submit-button {
+            background-color: white;
+            color: black;
+            border: 2px solid #86C039;
+            color: black;
+        }
+        .submit-button:hover {
+            background-color: white;
+            background-color: white;
+            border: 2px solid #86C039;
+            color: black;
+        }
+        .start-diagnosis {
+            background-color: #86C039;
+            width: 12cm;
+            height: 1.5cm;
+            border-radius: 10px;
+        }
+        .start-diagnosis:hover {
+            background-color: #86C039;
+            border: none;
+            color: white;
+        }
+        .restart-button {
+            background-color: white;
+            color: black;
+            width: 7cm;
+            height: 1.5cm;
+            border-radius: 10px;
+            border: 2px solid #86C039;
+        }
+        .restart-button:hover {
+        }
+        #result {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 20px;">
+        <button class="start-diagnosis" onclick="this.style.display='none'; document.getElementById('surveyContainer').style.display='block'; setTimeout(function() { document.getElementById('surveyContainer').style.transform='scaleY(1)'; }, 1)">Начать самодиагностику</button>
+    </div>
+    <div class="survey-container" id="surveyContainer">
+        <h2 style="text-align: center;">Сканер антихрупкости</h2>
+        <br style="clear: both;">
+        <p class="instruction"><strong>Оцени каждое утверждение:</strong></p>
+        <form id="likertForm">
+            <div class="statement">
+                <label style="font-size: 20px;">1. После каждого сбоя мы делаем короткий разбор</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q1" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q1" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q1" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">2. Команда открыто говорит об ошибках и рисках</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q2" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q2" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q2" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">3. Потеря одного сотрудника не парализует работу</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q3" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q3" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q3" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">4. Процессы документированы и воспроизводимы</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q4" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q4" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q4" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">5. Есть зарезервированные ресурсы под эксперименты</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q5" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q5" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q5" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">6. Приоритеты корректируются по сигналам, а не «раз в квартал»</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q6" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q6" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q6" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">7. После кризиса мы фиксируем, что именно усилили (процесс, роль, стандарт, метрику)</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q7" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q7" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q7" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <div class="statement">
+                <label style="font-size: 20px;">8. Руководитель не является единственной точкой принятия решений</label>
+                <div class="likert-scale">
+                    <label style="font-size: 18px;"><input type="radio" name="q8" value="0"> Не похоже</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q8" value="1"> Бывает</label>
+                    <label style="font-size: 18px;"><input type="radio" name="q8" value="2"> Да, это про нас</label>
+                </div>
+            </div>
+            <button type="button" class="submit-button" onclick="calculateResult()">Посмотреть результаты</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        function startSurvey() {
+            document.getElementById('surveyContainer').style.display = 'block';
+            document.querySelector('.start-diagnosis').style.display = 'none';
+        }
+
+        function calculateResult() {
+            let score = 0;
+            let allAnswered = true;
+            const formElements = document.getElementById('likertForm').elements;
+            const radios = document.querySelectorAll('input[type="radio"]');
+            for (let i = 0; i < radios.length; i += 3) {
+                if (!(radios[i].checked || radios[i + 1].checked || radios[i + 2].checked)) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+            if (!allAnswered) {
+                document.getElementById('result').innerHTML = '<p>Необходимо ответить на все вопросы</p>';
+                return;
+            }
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].checked) {
+                    score += parseInt(formElements[i].value);
+                }
+            }
+            const resultDiv = document.getElementById('result');
+            let interpretation = '';
+            const resultStyle = 'background-color: white; color: black; padding: 15px; border-radius: 20px; text-align: center; display: inline-block;';
+            if (score >= 0 && score <= 5) {
+                interpretation = 'Сейчас твоя управленческая система показывает хрупкое состояние: начни с защиты ядра и устранения «точек отказа».';
+            } else if (score >= 6 && score <= 11) {
+                interpretation = 'Сейчас твоя управленческая система показывает устойчивое состояние: встрой практику разборов и быстрых экспериментов.';
+            } else if (score >= 12 && score <= 16) {
+                interpretation = 'Сейчас твоя управленческая система выглядит антихрупкой: масштабируй сильные стороны и не перегружай систему контролем.';
+            }
+            resultDiv.innerHTML = `<p style="${resultStyle}">${interpretation}</p><div style='display: flex; justify-content: center;'><button class='restart-button' id='restartBtn' onclick='restartSurvey()'>Пройти заново</button></div>`;
+            document.querySelector('.submit-button').style.display = 'none';
+        }
+
+        function restartSurvey() {
+            const formElements = document.getElementById('likertForm').elements;
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].type === 'radio') {
+                    formElements[i].checked = false;
+                }
+            }
+            document.getElementById('result').innerHTML = '';
+            document.querySelector('.submit-button').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
